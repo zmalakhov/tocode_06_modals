@@ -24,6 +24,12 @@
                 required: true
             }
         },
+        mounted(){
+            document.body.addEventListener('keyup', e => {
+                //console.log(e);
+                if (e.keyCode === 27) this.$emit('close')
+            })
+        },
         computed: {},
         methods: {}
     }
