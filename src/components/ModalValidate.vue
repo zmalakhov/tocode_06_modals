@@ -5,7 +5,7 @@
     >
         <!-- body -->
         <div slot="body">
-            <form @submit.prevent="">
+            <form @submit.prevent="onSubmit">
                 <div class="form-item" :class="{ errorInput: $v.name.$error }">
                     <label>Name:</label>
                     <p class="errorText" v-if="!$v.name.required">Field is required!</p>
@@ -59,6 +59,18 @@
             email: {
                 required,
                 email
+            }
+        },
+        methods: {
+            onSubmit() {
+                this.$v.$touch()
+                if (!this.$v.$invalid){
+                    const user = {
+                        name: this.name,
+                        email: this.email,
+                    }
+                    console.log(user);
+                }
             }
         }
 
