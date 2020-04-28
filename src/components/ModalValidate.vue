@@ -17,8 +17,19 @@
                             @change="$v.name.$touch()"
                     >
                 </div>
-                <label>Email:</label>
-                <input v-bind="email">
+
+                <div class="form-item" :class="{ errorInput: $v.email.$error }">
+                    <label>Email:</label>
+                    <p class="errorText" v-if="!$v.email.required">Field is required!</p>
+                    <p class="errorText" v-if="!$v.email.email">Email is not correct!</p>
+                    <input
+                            v-model="email"
+                            :class="{ error: $v.email.$error }"
+                            @change="$v.email.$touch()"
+                    >
+                </div>
+
+                <!--button-->
                 <button class="btn btnPrimary">Submit</button>
             </form>
 
@@ -61,11 +72,13 @@
         font-size: 13.4px;
         color: #de4040;
     }
+
     .form-item {
-        &.errorInput .errorText{
+        &.errorInput .errorText {
             display: block;
         }
     }
+
     input.error {
         border-color: #de4040;
     }
